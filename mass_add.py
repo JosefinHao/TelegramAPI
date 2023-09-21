@@ -1,13 +1,21 @@
 from telethon import TelegramClient, events, sync, utils
 from telethon.tl.functions.messages import AddChatUserRequest
-import td
- 
-api_id = 28660903
-api_hash = '2e6d3d05025f5bd74427d140a45bbc47'
+import re
 
-client = TelegramClient('session_name', api_id, api_hash)
-client.start()
 
+client_chat_ids = []
+
+
+def import_clients():
+    with open("TG_client_groups.rtf", "r") as file:
+        text = file.read()
+    input_list = text.split("\\\n")
+    for input in input_list:
+        client_chat_ids.append(re.sub("\D", "", input))
+    # print(client_chat_ids)
+
+
+# TG groups to test:
 chat_groups = [
     4023732695,
     4044874801,
@@ -38,45 +46,31 @@ chat_groups = [
     4089323929,
     4076145680,
     4038409950,
-    4056712866
+    4056712866,
 ]
-# chat_id = 4023732695
-# user_to_add = 464929491  # Max's TG ID
-# user_to_add = 1299245979 # Michael's TG ID
-# user_to_add = 5498034564 # Nabeel's TG ID
-# user_to_add = 732931592 # Daisy's TG ID
 
-users_to_add = [464929491,
-                1299245979,
-                5498034564,
-                732931592]
+users_to_add = [
+    464929491,  # Max's TG ID
+    1299245979,  # Michael's TG ID
+    5498034564,  # Nabeel's TG ID
+    732931592,  # Daisy's TG ID
+]
 
-# print(client.get_me().stringify())
+api_id = 28660903
+api_hash = "2e6d3d05025f5bd74427d140a45bbc47"
 
-# client.download_profile_photo('me')
-# messages = client.get_messages('username')
-# messages[0].download_media()
-
-# @client.on(events.NewMessage(pattern='(?i)hi|hello'))
-# async def handler(event):
-#     await event.respond('Hey!')
-#     await client(AddChatUserRequest(
-#         chat_id,
-#         user_to_add,
-#         fwd_limit=10  # Allow the user to see the 10 last messages
-#     ))
-
+client = TelegramClient("session_name", api_id, api_hash)
+client.start()
 
 for chat_id in chat_groups:
     for user_to_add in users_to_add:
         try:
-            client(AddChatUserRequest(
+            client(
+                AddChatUserRequest(
                     chat_id,
                     user_to_add,
-                    fwd_limit=100  # Allow the user to see the 100 last messages
-                ))        
+                    fwd_limit=100,  # Allow the user to see the 100 last messages
+                )
+            )
         except Exception as error:
-            print(error) 
-
-
-
+            print(error)
