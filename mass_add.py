@@ -33,7 +33,7 @@ users_to_add = [
     # 464929491,  # Max's TG ID
     # 1299245979,  # Michael's TG ID
     # 5498034564,  # Nabeel's TG ID
-    # 732931592,  # Daisy's TG ID
+    732931592,  # Daisy's TG ID
     # 5501765660  # Angelly's TG ID
 ]
 
@@ -46,7 +46,7 @@ client.start()
 # create test groups and add users to them all at once, target 600+ groups
 # for n in range(50):
 #     lincoln_id = 1608449357
-#     group_number = 51 + n
+#     group_number = 201 + n
 #     group_name = "TestGroup" + str(group_number)
 
 #     # create a test group and get chat_id
