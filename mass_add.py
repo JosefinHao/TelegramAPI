@@ -78,7 +78,7 @@ client.start()
 #     f.write(",".join([str(i) for i in chat_groups]))
 
 
-# # add one user to all test groups
+# add one user to all test groups
 for user_to_add in users_to_add:
     for chat_id in test_group_chat_ids:
         try:
